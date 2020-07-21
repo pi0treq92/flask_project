@@ -1,0 +1,19 @@
+mkdir flask_project
+git init
+python3 -m venv env
+env\Scripts\activate
+heroku create wordcount-pro
+heroku create wordcount-stage
+git remote add pro git@heroku.com:YOUR_APP_NAME.git
+git remote add stage git@heroku.com:YOUR_APP_NAME.git
+##For staging: git push stage master
+##For production: git push pro master
+deactivate
+touch .env
+set APP_SETTINGS=config.DevelopmentConfig
+
+heroku config:set APP_SETTINGS=config.StagingConfig --remote stage
+heroku config:set APP_SETTINGS=config.ProductionConfig --remote pro
+heroku run python app.py --app wordcount-stage
+heroku run python app.py --app wordcount-pro
+pip install --no-use-pep517 alembic
