@@ -17,3 +17,4 @@ heroku config:set APP_SETTINGS=config.ProductionConfig --remote pro
 heroku run python app.py --app wordcount-stage
 heroku run python app.py --app wordcount-pro
 pip install --no-use-pep517 alembic
+
